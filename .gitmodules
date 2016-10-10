@@ -1,0 +1,6 @@
+[submodule "pdf_to_text"]
+	path = pdf_to_text
+	url = https://github.com/schwamster/pdf_to_text
+[submodule "ocr_service"]
+	path = ocr_service
+	url = https://github.com/schwamster/ocr_service
