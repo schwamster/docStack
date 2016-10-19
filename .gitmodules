@@ -4,3 +4,6 @@
 [submodule "ocr_service"]
 	path = ocr_service
 	url = https://github.com/schwamster/ocr_service
+[submodule "luis_adapter_service"]
+	path = luis_adapter_service
+	url = https://github.com/schwamster/luis_adapter_service.git
