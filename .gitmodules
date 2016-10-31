@@ -10,3 +10,6 @@
 [submodule "doc-stack-app"]
 	path = doc-stack-app
 	url = https://github.com/schwamster/doc-stack-app.git
+[submodule "doc-stack-app-api"]
+	path = doc-stack-app-api
+	url = https://github.com/schwamster/doc-stack-app-api.git
