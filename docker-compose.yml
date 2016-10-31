@@ -1,3 +1,7 @@
+redis:
+    image: redis:alpine
+    ports: ["6379"]
+    
 pdf_to_text:
     build: ./pdf_to_text/
     command: nodemon -L --debug=5858
