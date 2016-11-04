@@ -11,11 +11,18 @@ services:
         build: ./doc-stack-app-api/publish/web/
         ports: 
             - "3002:80"
+        links:
+            - redis
 
     redis:
         image: redis:alpine
         ports: ["6379:6379"]
-        
+    
+    text-worker:
+        build: ./text_worker/publish/worker/
+        links:
+            - redis
+
     pdf_to_text:
         build: ./pdf_to_text/
         command: nodemon -L --debug=5858
