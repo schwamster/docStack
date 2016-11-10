@@ -6,6 +6,15 @@ services:
             - "4200:80"
         links:
             - doc-stack-app-api
+    
+    doc-store:
+        build: ./doc-store/publish/web/
+        ports: 
+            - "3003:80"
+        links:
+            - rethinkdb
+        environment: 
+            - RethinkDb:Host=rethinkdb
 
     doc-stack-app-api:
         build: ./doc-stack-app-api/publish/web/
@@ -13,10 +22,18 @@ services:
             - "3002:80"
         links:
             - redis
+            - doc-store
 
     redis:
         image: redis:alpine
         ports: ["6379:6379"]
+    
+    rethinkdb:
+        image: rethinkdb:2.3.5
+        command: rethinkdb --bind all
+        volumes:
+            - ./rethinkdb-data:/data
+        ports: ["28015:28015", "29015:29015", "6001:8080"]
     
     text-worker:
         build: ./text_worker/publish/worker/
