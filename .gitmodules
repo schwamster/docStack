@@ -16,9 +16,6 @@
 [submodule "text_worker"]
 	path = text_worker
 	url = https://github.com/schwamster/text_worker.git
-[submodule "doc-stack-persistor"]
-	path = doc-stack-persistor
-	url = https://github.com/schwamster/doc-stack-persistor.git
 [submodule "doc-store"]
 	path = doc-store
 	url = https://github.com/schwamster/doc-store.git
