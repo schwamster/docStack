@@ -42,6 +42,7 @@ services:
         environment: 
             - Queue="documents:process:0"
             - OcrServiceHost="ocr_service:5000"
+            - RedisHost="redis"
         links:
             - redis
 
