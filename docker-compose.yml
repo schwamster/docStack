@@ -18,6 +18,8 @@ services:
 
     doc-stack-app-api:
         build: ./doc-stack-app-api/publish/web/
+        environment: 
+            - TextExtractQueue="documents:process:0"
         ports: 
             - "3002:80"
         links:
@@ -37,6 +39,9 @@ services:
     
     text-worker:
         build: ./text_worker/publish/worker/
+        environment: 
+            - Queue="documents:process:0"
+            - OcrServiceHost="ocr_service:5000"
         links:
             - redis
 
