@@ -40,11 +40,12 @@ services:
     text-worker:
         build: ./text_worker/publish/worker/
         environment: 
-            - Queue="documents:process:0"
-            - OcrServiceHost="ocr_service:5000"
-            - RedisHost="redis"
+            - Queue=documents:process:0
+            - OcrServiceHost=ocr_service:5000
+            - RedisHost=redis
         links:
             - redis
+            - ocr_service
 
     pdf_to_text:
         build: ./pdf_to_text/
@@ -75,4 +76,4 @@ services:
             - "5001:5000"
         command: host
         environment:
-            - ComputerVisionKey="${ComputerVisionKey}"
+            - ComputerVisionKey=${ComputerVisionKey}
