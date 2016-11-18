@@ -19,7 +19,7 @@ services:
     doc-stack-app-api:
         build: ./doc-stack-app-api/publish/web/
         environment: 
-            - TextExtractQueue="documents:process:0"
+            - TextExtractQueue=documents:process:0
         ports: 
             - "3002:80"
         links:
