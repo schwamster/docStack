@@ -29,6 +29,10 @@ Please join the conversation here:
 
 In this state we just want to put out a POC without focusing on a lot of the important details. The first thing we want to proove is: upload a document, extract text, put it in a store, make the docs searchable in the client
 
+### Build States
+
+doc-stack-app: [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app)
+
 ## Getting started
 this project contains submodules. when cloning use the following cmd:
 
