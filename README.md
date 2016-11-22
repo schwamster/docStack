@@ -32,6 +32,7 @@ In this state we just want to put out a POC without focusing on a lot of the imp
 ### Build States
 
 doc-stack-app: [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app)
+[![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app/)
 
 ## Getting started
 this project contains submodules. when cloning use the following cmd:
