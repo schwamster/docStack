@@ -37,6 +37,7 @@ In this state we just want to put out a POC without focusing on a lot of the imp
 | doc-stack-app-api  | https://github.com/schwamster/doc-stack-app-api  | [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app-api.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app-api)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app-api/)  |
 | text_worker  | https://github.com/schwamster/text-worker  | [![CircleCI](https://circleci.com/gh/schwamster/text_worker.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/text_worker)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/text-worker/)  |
 | ocr_service  | https://github.com/schwamster/ocr_service  | [![CircleCI](https://circleci.com/gh/schwamster/ocr_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/ocr_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/ocr_service/)  |
+| pdf_to_text  | https://github.com/schwamster/pdf_to_text  | [![CircleCI](https://circleci.com/gh/schwamster/pdf_to_text.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/pdf_to_text)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/pdf_to_text/)  |
 
 
 ## Getting started
