@@ -1,7 +1,7 @@
 version: '2'
 services:
     doc-stack-app:
-        build: ./doc-stack-app/
+        image: schwamster/doc-stack-app
         ports: 
             - "4200:80"
         links:
@@ -17,7 +17,7 @@ services:
             - RethinkDb:Host=rethinkdb
 
     doc-stack-app-api:
-        build: ./doc-stack-app-api/publish/web/
+        image: schwamster/doc-stack-app-api
         environment: 
             - TextExtractQueue=documents:process:0
         ports: 
@@ -38,7 +38,7 @@ services:
         ports: ["28015:28015", "29015:29015", "6001:8080"]
     
     text-worker:
-        build: ./text_worker/publish/worker/
+        image: schwamster/text-worker
         environment: 
             - Queue=documents:process:0
             - OcrServiceHost=ocr_service:5000
@@ -72,7 +72,7 @@ services:
             - LuisSubscriptionKey=${LuisSubscriptionKey}
 
     ocr_service:
-        build: ./ocr_service/
+        image: schwamster/ocr_service
         ports: 
             - "5001:5000"
         command: host
