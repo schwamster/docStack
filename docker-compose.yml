@@ -49,7 +49,7 @@ services:
             - ocr_service
 
     pdf_to_text:
-        build: ./pdf_to_text/
+        image: schwamster/pdf_to_text
         command: nodemon -L --debug=5858
         volumes:
             - ./pdf_to_text:/app
