@@ -41,8 +41,5 @@ In this state we just want to put out a POC without focusing on a lot of the imp
 
 
 ## Getting started
-this project contains submodules. when cloning use the following cmd:
-
-    git clone --recursive https://github.com/schwamster/docStack.git
 
 ![Architecture diagram](docStack.png)
