@@ -8,7 +8,7 @@ services:
             - doc-stack-app-api
     
     doc-store:
-        build: ./doc-store/publish/web/
+        image: schwamster/doc-store
         ports: 
             - "3003:80"
         links:
@@ -60,7 +60,7 @@ services:
             - ocr_service
 
     luis_adapter_service:
-        build: ./luis_adapter_service/
+        image: schwamster/luis_adapter_service
         command: nodemon -L --debug=5858
         volumes:
             - ./luis_adapter_service:/app
