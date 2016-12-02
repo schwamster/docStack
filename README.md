@@ -3,6 +3,8 @@
 
 # docStack
 
+docStack is a document management system with extensible amount of postproscessing services that make it easier to find, analyze and export your documents.
+
 ## What is docStack?
 
 docStack makes document management easy. upload documents in a variety of formats. docStack will store the data and provide you with the 
@@ -16,6 +18,69 @@ easier to find stuff again.
 
 docStack is also very much under development and is mainly used to figure out how to do a couple of things: microservices, docker, cognitive services...
 
+
+## Continuous integration / delivery
+
+| service  | git  | build  | docker  |
+|---|---|---|---|
+| doc-stack-app  | https://github.com/schwamster/doc-stack-app  | [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app/)  |
+| doc-stack-app-api  | https://github.com/schwamster/doc-stack-app-api  | [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app-api.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app-api)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app-api/)  |
+| text_worker  | https://github.com/schwamster/text-worker  | [![CircleCI](https://circleci.com/gh/schwamster/text_worker.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/text_worker)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/text-worker/)  |
+| ocr_service  | https://github.com/schwamster/ocr_service  | [![CircleCI](https://circleci.com/gh/schwamster/ocr_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/ocr_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/ocr_service/)  |
+| pdf_to_text  | https://github.com/schwamster/pdf_to_text  | [![CircleCI](https://circleci.com/gh/schwamster/pdf_to_text.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/pdf_to_text)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/pdf_to_text/)  |
+| doc-store  | https://github.com/schwamster/doc-store  | [![CircleCI](https://circleci.com/gh/schwamster/doc-store.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-store)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-store/)  |
+| luis_adapter_service  | https://github.com/schwamster/luis_adapter_service  | [![CircleCI](https://circleci.com/gh/schwamster/luis_adapter_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/luis_adapter_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/luis_adapter_service/)  |
+
+## Documentation
+
+### Overview
+
+![Architecture diagram](docStack.png)
+
+### Getting started
+
+The eaiest way to get up and running is with docker. All services described in the Overview are available as docker images (see continuous integration/delivery).
+For more info on how to get started with docker go here: https://docs.docker.com/engine/getstarted/
+
+After cloning this project you will have to set a number of environment variables on your computer (see docker-compose.yml to find out were they are used)
+
+    - ComputerVisionKey
+    - LuisAppId
+    - LuisSubscriptionKey
+
+More info on how to set environment variables:
+
+[Windows](https://technet.microsoft.com/en-us/library/ff730964.aspx) | [Unix/Linux](http://unix.stackexchange.com/questions/117467/how-to-permanently-set-environmental-variables)
+
+#### ComputerVisionKey
+
+We are using [Microsofts Cognitive Services](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) in the ocr_service to turn images and pdfs to text.
+You will have to get your own Api Key ( free up to a reasonable limit for now) from [here](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api)
+Set the environment variable "ComputerVisionKey" to that value. 
+
+#### LuisAppId & LuisSubscriptionKey
+
+We are using [Language Understanding Intelligent Services](https://www.luis.ai/) in analyze the text of the documents.
+You will have to get your own Api Key ( free up to a reasonable limit for now) from [here](https://www.luis.ai/)
+Set the following environment variables:
+
+LuisAppId => what luis app (model) to use default is the msft example app with the cortana model
+LuisSubscriptionKey => Your own subscription key from luis
+
+#### Running for the first time
+
+After you have set the environment variables and docker is up and running just navigate to the root of this project and run:
+
+        docker-compose up
+
+docker will now pull all images and then run each service.
+
+Open a browser and navigate to http://localhost:4200 to access the application.
+
+### How does the application work
+
+tbd.
+
 ## Contribution
 
 Contributors are very welcome. If you are interested to find out how a microservice infrastructure might work (still trying to figure that out myself...)
@@ -28,20 +93,3 @@ Please join the conversation here:
 ## Current State
 
 In this state we just want to put out a POC without focusing on a lot of the important details. The first thing we want to proove is: upload a document, extract text, put it in a store, make the docs searchable in the client
-
-### Build States
-
-| service  | git  | build  | docker  |
-|---|---|---|---|
-| doc-stack-app  | https://github.com/schwamster/doc-stack-app  | [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app/)  |
-| doc-stack-app-api  | https://github.com/schwamster/doc-stack-app-api  | [![CircleCI](https://circleci.com/gh/schwamster/doc-stack-app-api.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-stack-app-api)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-stack-app-api/)  |
-| text_worker  | https://github.com/schwamster/text-worker  | [![CircleCI](https://circleci.com/gh/schwamster/text_worker.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/text_worker)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/text-worker/)  |
-| ocr_service  | https://github.com/schwamster/ocr_service  | [![CircleCI](https://circleci.com/gh/schwamster/ocr_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/ocr_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/ocr_service/)  |
-| pdf_to_text  | https://github.com/schwamster/pdf_to_text  | [![CircleCI](https://circleci.com/gh/schwamster/pdf_to_text.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/pdf_to_text)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/pdf_to_text/)  |
-| doc-store  | https://github.com/schwamster/doc-store  | [![CircleCI](https://circleci.com/gh/schwamster/doc-store.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-store)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-store/)  |
-| luis_adapter_service  | https://github.com/schwamster/luis_adapter_service  | [![CircleCI](https://circleci.com/gh/schwamster/luis_adapter_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/luis_adapter_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/luis_adapter_service/)  |
-
-
-## Getting started
-
-![Architecture diagram](docStack.png)
