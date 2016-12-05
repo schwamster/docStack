@@ -51,8 +51,6 @@ services:
     pdf_to_text:
         image: schwamster/pdf_to_text
         command: nodemon -L --debug=5858
-        volumes:
-            - ./pdf_to_text:/app
         ports:
             - "3000:3000"
             - "5858:5858"
@@ -62,8 +60,6 @@ services:
     luis_adapter_service:
         image: schwamster/luis_adapter_service
         command: nodemon -L --debug=5858
-        volumes:
-            - ./luis_adapter_service:/app
         ports:
             - "3001:3000"
             - "5859:5858"
