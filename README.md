@@ -86,10 +86,29 @@ tbd.
 Contributors are very welcome. If you are interested to find out how a microservice infrastructure might work (still trying to figure that out myself...)
 or you think the document management is interesting or if you see where we are doing things wrong dont hesitate to help out.
 
+Please follow this guideline if you want to contribute:
+
+* Fork the repository.
+* Create a branch to work in.
+* Make your feature addition or bug fix.
+* Don't forget the unit tests.
+* Send a pull request.
+
 Please join the conversation here:
 
 [![Join the chat at https://gitter.im/docStack-im/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/docStack-im/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Current State
+## License
 
-In this state we just want to put out a POC without focusing on a lot of the important details. The first thing we want to proove is: upload a document, extract text, put it in a store, make the docs searchable in the client
+Copyright © Bastian Töpfer and contributors.
+docStack is provided as-is under the MIT license. For more information see [LICENSE](https://github.com/schwamster/docStack/LICENSE).
+
+## Acknowledgement
+
+Some services use external services:
+
+Powered by Microsoft’s Cognitive Services: https://www.microsoft.com/cognitive-services
+
+The logo was made with [Logo Maker](http://logomakr.com)
+
+Stack graphic by [Freepik](http://www.flaticon.com/authors/freepik) from [Flaticon](http://www.flaticon.com/) under [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
