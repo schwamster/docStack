@@ -112,3 +112,5 @@ Powered by Microsoft’s Cognitive Services: https://www.microsoft.com/cognitive
 The logo was made with [Logo Maker](http://logomakr.com)
 
 Stack graphic by [Freepik](http://www.flaticon.com/authors/freepik) from [Flaticon](http://www.flaticon.com/) under [Creative Commons BY 3.0](http://creativecommons.org/licenses/by/3.0/)
+
+The architecture diagram was made with [draw.io](https://www.draw.io/)
