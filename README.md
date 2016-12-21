@@ -30,6 +30,7 @@ docStack is also very much under development and is mainly used to figure out ho
 | pdf_to_text  | https://github.com/schwamster/pdf_to_text  | [![CircleCI](https://circleci.com/gh/schwamster/pdf_to_text.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/pdf_to_text)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/pdf_to_text/)  |
 | doc-store  | https://github.com/schwamster/doc-store  | [![CircleCI](https://circleci.com/gh/schwamster/doc-store.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-store)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-store/)  |
 | luis_adapter_service  | https://github.com/schwamster/luis_adapter_service  | [![CircleCI](https://circleci.com/gh/schwamster/luis_adapter_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/luis_adapter_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/luis_adapter_service/)  |
+| doc-identity  | https://github.com/schwamster/doc-identity  | [![CircleCI](https://circleci.com/gh/schwamster/doc-identity.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-identity)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-identity/)  |
 
 ## Documentation
 
@@ -47,6 +48,7 @@ After cloning this project you will have to set a number of environment variable
     - ComputerVisionKey
     - LuisAppId
     - LuisSubscriptionKey
+    - DocStackAdminPassword
 
 More info on how to set environment variables:
 
@@ -66,6 +68,14 @@ Set the following environment variables:
 
 LuisAppId => what luis app (model) to use default is the msft example app with the cortana model
 LuisSubscriptionKey => Your own subscription key from luis
+
+#### DocStackAdminPassword
+
+Right now there is only one user you can use to log on:
+username: admin
+password: whatever you set in the "DocStackAdminPassword" environmentvariable
+
+The password is used by doc-identity as an admin password. Usermanagment and so forth is still under construction.
 
 #### Running for the first time
 
