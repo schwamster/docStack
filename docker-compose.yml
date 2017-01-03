@@ -5,17 +5,16 @@ services:
         ports: 
             - "3004:80"
         environment: 
-            - Identity:DocStackAppHost=doc-stack-app:4200
+            - Identity:DocStackAppHost=http://localhost:4200
             - Identity:AdminPassword=${DocStackAdminPassword}
 
-    # hook up to doc-identity
     doc-stack-app:
         image: schwamster/doc-stack-app
         ports: 
             - "4200:80"
         links:
             - doc-stack-app-api
-            #- doc-identity
+            - doc-identity
         environment: 
             - IdentityAuthority=http://doc-identity:3004
 
