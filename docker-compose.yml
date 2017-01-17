@@ -6,6 +6,7 @@ services:
             - "3004:80"
         environment: 
             - Identity:DocStackAppHost=http://localhost:4200
+            - Identity:DocStackAppApiHost=http://localhost:3002
             - Identity:AdminPassword=${DocStackAdminPassword}
 
     doc-stack-app:
@@ -31,12 +32,14 @@ services:
         image: schwamster/doc-stack-app-api
         environment: 
             - TextExtractQueue=documents:process:0
+            - DocStackApp=http://localhost:4200
+            - IdentityServerAuthorizeUrl=http://localhost:3004/connect/authorize
         ports: 
             - "3002:80"
         links:
             - redis
             - doc-store
-
+            - doc-identity
     redis:
         image: redis:alpine
         ports: ["6379:6379"]
