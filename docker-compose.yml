@@ -33,7 +33,8 @@ services:
         environment: 
             - TextExtractQueue=documents:process:0
             - DocStackApp=http://localhost:4200
-            - IdentityServerAuthorizeUrl=http://localhost:3004/connect/authorize
+            - AlternativeIdentityServer=http://localhost:3004
+            - IdentityServerUrl=http://doc-identity
         ports: 
             - "3002:80"
         links:
