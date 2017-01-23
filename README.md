@@ -51,6 +51,7 @@ For more information about the frontend application please check out the project
 #### doc-identity
 
 This service is an Open ID Connect Server that is responsible to authenticate request from the UI to the BFF and for all service to service communication.
+We use [IdentityServer4](https://github.com/IdentityServer/IdentityServer4) to provide that functionality.
 For more information about the frontend application please check out the project itself under: [doc-identity](https://github.com/schwamster/doc-identity)
 
 
@@ -168,6 +169,8 @@ docStack is provided as-is under the MIT license. For more information see [LICE
 Some services use external services:
 
 Powered by Microsoft’s Cognitive Services: https://www.microsoft.com/cognitive-services
+
+The Open Connect ID solution is provided by this awesome project: [IdentityServer4](https://github.com/IdentityServer/IdentityServer4)
 
 The logo was made with [Logo Maker](http://logomakr.com)
 
