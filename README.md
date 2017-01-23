@@ -38,12 +38,59 @@ docStack is also very much under development and is mainly used to figure out ho
 
 ![Architecture diagram](docStack.png)
 
+#### doc-stack-app
+
+This is the frontend the user can user to interact with docStack. It is an angular app. The docker-compose file hosts the application on port 4200 => http://localhost:4200.
+For more information about the frontend application please check out the project itself under: [doc-stack-app](https://github.com/schwamster/doc-stack-app)
+
+#### doc-stack-app-api
+
+This service is the Backend Api of doc-stack-app. This follows the "Backend for Frontend" pattern - see [BFF](http://samnewman.io/patterns/architectural/bff/).
+For more information about the frontend application please check out the project itself under: [doc-stack-app-api](https://github.com/schwamster/doc-stack-app-api)
+
+#### doc-identity
+
+This service is an Open ID Connect Server that is responsible to authenticate request from the UI to the BFF and for all service to service communication.
+For more information about the frontend application please check out the project itself under: [doc-identity](https://github.com/schwamster/doc-identity)
+
+
+#### text_worker
+
+Extracts text from the document. It will use different sub-services (ocr_service, pdf_to_text) depending on the source document to do that.
+For more information about the frontend application please check out the project itself under: [text_worker](https://github.com/schwamster/text_worker)
+
+#### ocr_service
+
+Extracts document from a document with the help of OCR. For this we currently use [Computer Vision](https://www.microsoft.com/cognitive-services)
+For more information about the frontend application please check out the project itself under: [ocr_service](https://hub.docker.com/r/schwamster/ocr_service/)
+
+#### pdf_to_text
+
+Extract the text from pdfs with the help of this node.js package: https://github.com/zetahernandez/pdf-to-text
+For more information about the frontend application please check out the project itself under: [pdf_to_text](https://github.com/schwamster/pdf_to_text)
+
+#### analyze_worker
+
+This is just an conceptual service at this moment. This combines all services that are postproscessing a document where the text has already been extracted.
+So far one idea is to run the extracted text through Luis with a configured Model to extract entites from the text. Other ideas: Tagging, Sorting, Find related documents...
+
+#### luis_apdater
+
+Analyzes a document with the help of [LUIS](https://www.luis.ai/). The result is an intent and the intents entities. The goal is to have the user choose multiple LUIS models and even create custom models.
+For more information about the frontend application please check out the project itself under: [luis_adapter_service](https://github.com/schwamster/luis_adapter_service)
+
+#### doc-store
+
+This service is responsible for the CRUD operations on the documents. Creating new documents and enriching documents with more information. This service also provides the APIs necessary to search and retrieve documents.
+For more information about the frontend application please check out the project itself under: [doc-store](https://github.com/schwamster/doc-store)
+
 ### Getting started
 
 The eaiest way to get up and running is with docker. All services described in the Overview are available as docker images (see continuous integration/delivery).
 For more info on how to get started with docker go here: https://docs.docker.com/engine/getstarted/
 
-After cloning this project you will have to set a number of environment variables on your computer (see docker-compose.yml to find out were they are used)
+After cloning this project you will have to set a number of environment variables on your computer (see docker-compose.yml to find out were they are used).
+Alternativly you can just set them in the docker-compose.yml file. They are however omitted here, because they are of a more sensitive nature and therefore not supposed to be version controlled
 
     - ComputerVisionKey
     - LuisAppId
@@ -89,7 +136,10 @@ Open a browser and navigate to http://localhost:4200 to access the application.
 
 ### How does the application work
 
-tbd.
+Basic Flows: 
+
+* User logs on. User uploads a document. docStack processes the document. User can see processing results | User can read/view the document.
+* User logs on. User searches for a document. User finds document. User can see the processing results | User can read/view the document
 
 ## Contribution
 
