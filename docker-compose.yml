@@ -17,7 +17,7 @@ services:
             - doc-stack-app-api
             - doc-identity
         environment: 
-            - IdentityAuthority=http://doc-identity:3004
+            - IdentityAuthority=http://doc-identity
 
     doc-store:
         image: schwamster/doc-store
@@ -27,6 +27,7 @@ services:
             - rethinkdb
         environment: 
             - RethinkDb:Host=rethinkdb
+            - IdentityAuthority=http://doc-identity
 
     doc-stack-app-api:
         image: schwamster/doc-stack-app-api
