@@ -1,5 +1,16 @@
 version: '2'
 services:
+    consul:
+        image: consul
+        ports:
+            - "8500:8500"
+    registrator: 
+        image: gliderlabs/registrator:latest
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock
+        command: consul://localhost:8500
+        network_mode: host
+
     doc-identity:
         image: schwamster/doc-identity
         ports: 
@@ -8,14 +19,23 @@ services:
             - Identity:DocStackAppHost=http://localhost:4200
             - Identity:DocStackAppApiHost=http://localhost:3002
             - Identity:AdminPassword=${DocStackAdminPassword}
+        depends_on: 
+            - consul
+            - registrator
+        labels: 
+            - "SERVICE_TAGS=v1"
 
     doc-stack-app:
         image: schwamster/doc-stack-app
         ports: 
             - "4200:80"
+        depends_on: 
+            - consul
+            - registrator
         links:
             - doc-stack-app-api
             - doc-identity
+            - consul
         environment: 
             - IdentityAuthority=http://doc-identity
 
@@ -23,6 +43,9 @@ services:
         image: schwamster/doc-store
         ports: 
             - "3003:80"
+        depends_on: 
+            - consul
+            - registrator
         links:
             - rethinkdb
         environment: 
@@ -35,16 +58,24 @@ services:
             - TextExtractQueue=documents:process:0
             - DocStackApp=http://localhost:4200
             - AlternativeIdentityServer=http://localhost:3004
-            - IdentityServerUrl=http://doc-identity
+            - IdentityServerUrl=http://localhost
         ports: 
             - "3002:80"
         links:
             - redis
             - doc-store
-            - doc-identity
+            - doc-identity:localhost
+            - consul
+        depends_on: 
+            - consul
+            - registrator
+
     redis:
         image: redis:alpine
         ports: ["6379:6379"]
+        depends_on: 
+            - consul
+            - registrator
     
     rethinkdb:
         image: rethinkdb:2.3.5
@@ -52,6 +83,9 @@ services:
         volumes:
             - ./rethinkdb-data:/data
         ports: ["28015:28015", "29015:29015", "6001:8080"]
+        depends_on: 
+            - consul
+            - registrator
     
     text-worker:
         image: schwamster/text-worker
@@ -63,6 +97,9 @@ services:
         links:
             - redis
             - ocr_service
+        depends_on: 
+            - consul
+            - registrator
 
     pdf_to_text:
         image: schwamster/pdf_to_text
@@ -72,6 +109,9 @@ services:
             - "5858:5858"
         links:
             - ocr_service
+        depends_on: 
+            - consul
+            - registrator
 
     luis_adapter_service:
         image: schwamster/luis_adapter_service
@@ -82,6 +122,9 @@ services:
         environment: 
             - LuisAppId=5e5610fe-0f83-4058-882a-08977872d91e
             - LuisSubscriptionKey=${LuisSubscriptionKey}
+        depends_on: 
+            - consul
+            - registrator
 
     ocr_service:
         image: schwamster/ocr_service
@@ -90,3 +133,6 @@ services:
         command: host
         environment:
             - ComputerVisionKey=${ComputerVisionKey}
+        depends_on: 
+            - consul
+            - registrator
