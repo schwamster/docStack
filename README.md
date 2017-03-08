@@ -7,9 +7,9 @@ docStack is a document management system with extensible amount of postproscessi
 
 ## What is docStack?
 
-docStack makes document management easy. upload documents in a variety of formats. docStack will store the data and provide you with the 
+docStack makes document management easy. upload documents in a variety of formats. docStack will store the data and provide you with the
 tools to find the documents again at some later time. docStack will also run a number of post-processing steps on your documents to make it a lot
-easier to find stuff again. 
+easier to find stuff again.
 
 * text extract: docStack will extract the text out of your document no matter if it is a scan, photo or a word document
 * tagging: dockStack will extract tags from your document
@@ -31,6 +31,7 @@ docStack is also very much under development and is mainly used to figure out ho
 | doc-store  | https://github.com/schwamster/doc-store  | [![CircleCI](https://circleci.com/gh/schwamster/doc-store.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-store)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-store/)  |
 | luis_adapter_service  | https://github.com/schwamster/luis_adapter_service  | [![CircleCI](https://circleci.com/gh/schwamster/luis_adapter_service.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/luis_adapter_service)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/luis_adapter_service/)  |
 | doc-identity  | https://github.com/schwamster/doc-identity  | [![CircleCI](https://circleci.com/gh/schwamster/doc-identity.svg?style=shield&circle-token)](https://circleci.com/gh/schwamster/doc-identity)  | [![Docker Automated buil](https://img.shields.io/docker/automated/jrottenberg/ffmpeg.svg)](https://hub.docker.com/r/schwamster/doc-identity/)  |
+| doc-notifications | https://github.com/schwamster/doc-notifications |
 
 ## Documentation
 
@@ -85,9 +86,17 @@ For more information about the frontend application please check out the project
 This service is responsible for the CRUD operations on the documents. Creating new documents and enriching documents with more information. This service also provides the APIs necessary to search and retrieve documents.
 For more information about the frontend application please check out the project itself under: [doc-store](https://github.com/schwamster/doc-store)
 
+### doc-notifications
+
+Since docstack is based on a multi-step event-driven architecture, doc-notifications (written in node) serves as the "mediator" which orchestrates these async steps of each user-triggered action. If you think of each feature of docstack as a workflow containing multiple steps which must be executed by various services, doc-notifications is the one that contains that workflow information and the required steps to complete a certain request.
+
+The workflows that the app executes and that are fulfilled by the doc-notifications mediator service can be seen below under section "How does the application work".
+
+For more information about the notifications service please check out the project itself under: [doc-notifications](https://github.com/schwamster/doc-notifications)
+
 ### Getting started
 
-The eaiest way to get up and running is with docker. All services described in the Overview are available as docker images (see continuous integration/delivery).
+The easiest way to get up and running is with docker. All services described in the Overview are available as docker images (see continuous integration/delivery).
 For more info on how to get started with docker go here: https://docs.docker.com/engine/getstarted/
 
 After cloning this project you will have to set a number of environment variables on your computer (see docker-compose.yml to find out were they are used).
@@ -106,7 +115,7 @@ More info on how to set environment variables:
 
 We are using [Microsofts Cognitive Services](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) in the ocr_service to turn images and pdfs to text.
 You will have to get your own Api Key ( free up to a reasonable limit for now) from [here](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api)
-Set the environment variable "ComputerVisionKey" to that value. 
+Set the environment variable "ComputerVisionKey" to that value.
 
 #### LuisAppId & LuisSubscriptionKey
 
@@ -131,13 +140,14 @@ After you have set the environment variables and docker is up and running just n
 
         docker-compose up
 
-docker will now pull all images and then run each service.
+docker will now pull all images and then run each service. You can add the "-d" parameter to start
+the services in detached mode.
 
 Open a browser and navigate to http://localhost:4200 to access the application.
 
 ### How does the application work
 
-Basic Flows: 
+Basic Flows:
 
 * User logs on. User uploads a document. docStack processes the document. User can see processing results | User can read/view the document.
 * User logs on. User searches for a document. User finds document. User can see the processing results | User can read/view the document
