@@ -3,9 +3,10 @@
 doc-identity:
     container_name: doc-identity
     image: schwamster/doc-identity
-    ports: 
-        - "3004:80"
-    environment: 
+    ports:
+        - "3004:3004"
+    environment:
+        - ASPNETCORE_URLS=http://+:3004 
         - Identity:DocStackAppHost=http://localhost:4200
         - Identity:DocStackAppApiHost=http://localhost:3002
         - Identity:AdminPassword=${DocStackAdminPassword}
@@ -13,32 +14,33 @@ doc-identity:
 doc-stack-app:
     container_name: doc-stack-app
     image: schwamster/doc-stack-app
-    ports: 
+    ports:
         - "4200:80"
     links:
         - doc-stack-app-api
-        - doc-identity
-    environment: 
-        - IdentityAuthority=http://doc-identity
+        - doc-identity:localhost
+    environment:
+        - IdentityAuthority=http://localhost:3004
 
 doc-store:
     image: schwamster/doc-store
-    ports: 
+    ports:
         - "3003:80"
     links:
         - rethinkdb
-    environment: 
+        - doc-identity:localhost
+    environment:
         - RethinkDb:Host=rethinkdb
-        - IdentityAuthority=http://doc-identity
+        - IdentityAuthority=http://localhost:3004
 
 doc-stack-app-api:
     container_name: doc-stack-app-api
     image: schwamster/doc-stack-app-api
-    environment: 
+    environment:
         - TextExtractQueue=documents:process:0
         - DocStackApp=http://localhost:4200
         - IdentityServerUrl=http://localhost:3004
-    ports: 
+    ports:
         - "3002:80"
     links:
         - redis
@@ -57,7 +59,7 @@ rethinkdb:
 
 text-worker:
     image: schwamster/text-worker
-    environment: 
+    environment:
         - Queue=documents:process:0
         - OcrServiceHost=ocr_service:5000
         - RedisHost=redis
@@ -81,13 +83,13 @@ luis_adapter_service:
     ports:
         - "3001:3000"
         - "5859:5858"
-    environment: 
+    environment:
         - LuisAppId=5e5610fe-0f83-4058-882a-08977872d91e
         - LuisSubscriptionKey=${LuisSubscriptionKey}
 
 ocr_service:
     image: schwamster/ocr_service
-    ports: 
+    ports:
         - "5001:5000"
     command: host
     environment:
